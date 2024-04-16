@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label ''}
     stages {
         stage("checkout") {
             steps {
@@ -8,7 +8,7 @@ pipeline {
         }
         stage("Build") {
             steps {
-                sh 'apt-get install -y npm'
+                sh 'npm install'
             }
         }
         stage("Test") { 
