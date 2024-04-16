@@ -6,12 +6,6 @@ pipeline {
                 checkout scm 
             }
         }
-    tools {nodejs "nodejs"}
-        stage("Example") { 
-            steps {
-                sh 'npm config ls'
-            }
-        }
         stage("Test") {
             steps {
                 sh 'npm install'
