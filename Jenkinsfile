@@ -1,19 +1,21 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:6-alpine'
-            args '-p 3000:3000'
-        }
-    }
-    environment {
-        CI = 'true' 
-    }
+    agent any
     stages {
-        stage('Build') {
+        stage("checkout") {
             steps {
-                sh 'npm install'
+                checkout scm 
             }
         }
-        
+        stage("Test") {
+            steps {
+                sh 'sudo apt install npm'
+                sh 'npm test'
+            }
+        }
+        stage("Build") { 
+            steps {
+                sh 'npm run build'
+            }
+        }
     }
 }
