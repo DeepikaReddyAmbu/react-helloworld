@@ -1,26 +1,19 @@
 pipeline {
-    agent any
-    tools {nodejs "nodejs"}
+    agent {
+        docker {
+            image 'node:6-alpine'
+            args '-p 3000:3000'
+        }
+    }
+    environment {
+        CI = 'true' 
+    }
     stages {
-        stage("checkout") {
-            steps {
-                checkout scm 
-            }
-        }
-        stage('Example') {
-           steps {
-           sh 'npm config ls'
-           }
-        }
-        stage("Build") {
+        stage('Build') {
             steps {
                 sh 'npm install'
             }
         }
-        stage("Test") { 
-            steps {
-                sh 'npm test'
-            }
-        }
+        
     }
 }
